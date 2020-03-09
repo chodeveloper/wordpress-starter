@@ -120,6 +120,9 @@ add_action( 'widgets_init', 'heejeong_theme_widgets_init' );
  * Enqueue scripts and styles.
  */
 function heejeong_theme_scripts() {
+	// adding google webfonts
+	wp_enqueue_style( 'heejeong-theme-fonts', 'https://fonts.googleapis.com/css?family=Baloo+2:400,700|Open+Sans:400,600,700&display=swap' );
+
 	wp_enqueue_style( 'heejeong-theme-style', get_stylesheet_uri() );
 
 	wp_enqueue_script( 'heejeong-theme-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
