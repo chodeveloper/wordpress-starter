@@ -1,0 +1,31 @@
+{
+  "name": "heejeong-theme",
+  "version": "0.0.1",
+  "description": "Accessible WordPress theme utilizing flex layouts and modern(ish) development practices.",
+  "main": "index.php",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chodeveloper/wordpress-starter"
+  },
+  "author": "Heejeong Cho",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/chodeveloper/wordpress-starter/issues"
+  },
+  "homepage": "https://github.com/chodeveloper/wordpress-starter#readme",
+  "devDependencies": {
+    "autoprefixer": "*",
+    "browser-sync": "*",
+    "gulp": "*",
+    "gulp-image": "*",
+    "gulp-jshint": "*",
+    "gulp-newer": "*",
+    "gulp-postcss": "*",
+    "gulp-sass": "*",
+    "gulp-sourcemaps": "*",
+    "jshint": "*"
+  }
+}
