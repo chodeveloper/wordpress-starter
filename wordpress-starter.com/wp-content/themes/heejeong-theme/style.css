@@ -889,6 +889,10 @@ a:hover, a:active {
 /*--------------------------------------------------------------
 ## Header
 --------------------------------------------------------------*/
+.header-image {
+	display: block;
+}
+
 .site-header {
 	position: relative;
 	padding: 1em;
