@@ -45,6 +45,8 @@ if ( ! function_exists( 'heejeong_theme_setup' ) ) :
 		// This theme uses wp_nav_menu() in one location.
 		register_nav_menus( array(
 			'menu-1' => esc_html__( 'Primary', 'heejeong-theme' ),
+			'menu-2' => esc_html__( 'Footer', 'heejeong-theme'),
+			'menu-3' => esc_html__( 'Social', 'heejeong-theme')
 		) );
 
 		/*
@@ -125,7 +127,7 @@ function heejeong_theme_scripts() {
 	// adding bootstrap 4 css
 	//wp_enqueue_style( 'bootstrap', 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' );
 	// adding FA css
-	//wp_enqueue_style( 'fontawesome', 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' );
+	wp_enqueue_style( 'fontawesome', 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' );
 
 	wp_enqueue_style( 'heejeong-theme-style', get_stylesheet_uri() );
 
