@@ -16,7 +16,7 @@
 	<footer id="colophon" class="site-footer">
 		<div class="footer-menu nav">
 			<h4>Menu</h4>
-			<?php wp_nav_menu( array( 'theme_location' => 'Footer' ) ); ?>
+			<?php wp_nav_menu( array( 'theme_location' => 'menu-2' ) ); ?>
 		</div>
 		<div class="site-info">
 			<div>
@@ -34,7 +34,7 @@
 				?>
 			</div>
 			<div class="footer-menu social">
-				<?php wp_nav_menu( array( 'menu' => 'Social') ); ?>
+				<?php wp_nav_menu( array( 'theme_location' => 'menu-3') ); ?>
 			</div>
 		</div><!-- .site-info -->
 	</footer><!-- #colophon -->

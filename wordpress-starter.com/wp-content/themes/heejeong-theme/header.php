@@ -24,7 +24,7 @@
 <div id="page" class="site">
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'heejeong-theme' ); ?></a>
 
-	<figure class="header-image"><?php the_header_image_tag(); ?></figure>
+	<div class="header-image"><?php the_header_image_tag(); ?></div>
 
 	<header id="masthead" class="site-header">
 		<div class="site-branding">
