@@ -6,7 +6,8 @@
 wp-content/*
 !wp-content/mu-plugins/
 !wp-content/plugins/
-!wp-content/themes/
+!wp-content/themes/heejeong-theme
+!wp-content/themes/twentyseventeen
 uploads/
 
 # ignore these plugins
