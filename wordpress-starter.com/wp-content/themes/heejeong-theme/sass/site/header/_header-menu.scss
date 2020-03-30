@@ -157,3 +157,12 @@ button.dropdown-toggle {
 
 	}
 }
+
+
+.main-navigation .menu-item-has-children > a, .main-navigation .page_item_has_children > a {
+	@media screen and (min-width: 600px) {
+		padding-right: 2em;
+    	background: none !important;
+	}
+    
+}
