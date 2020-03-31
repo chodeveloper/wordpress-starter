@@ -19,6 +19,7 @@
 
 	<?php wp_head(); ?>
 </head>
+<script src="https://kit.fontawesome.com/6202e2ac09.js"></script>
 
 <body <?php body_class(); ?>>
 <div id="page" class="site">
@@ -47,7 +48,7 @@
 		</div><!-- .site-branding -->
 
 		<nav id="site-navigation" class="main-navigation">
-			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'heejeong-theme' ); ?></button>
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></button>
 			<?php
 			wp_nav_menu( array(
 				'theme_location' => 'menu-1',

@@ -38,8 +38,9 @@
 
 .site-description {
 	margin: 0;
+	margin-top: 10px;
 	font-size: .9em;
-	font-style: italic;
+	//font-style: italic;
 	font-weight: 100;
 }
 
@@ -49,13 +50,13 @@
 		justify-content: space-between;
 	}
 
-	.site-branding {
-		width: 35%;
-	}
+	// .site-branding {
+	// 	width: 35%;
+	// }
 
-	.site-navigation {
-		width: 55%;
-	}
+	// .site-navigation {
+	// 	width: 55%;
+	// }
 }
 
 // import header-menu.scss
