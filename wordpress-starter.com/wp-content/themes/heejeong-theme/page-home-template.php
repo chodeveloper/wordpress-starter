@@ -16,49 +16,47 @@ get_header();
             ?>
             </div>
             <?php
-                $categories = get_categories( array(
-                    'orderby' => 'include',
-                    'order' => 'ASC',
-                    'include' => '6,9,7,10,8,'
-                ) );
+                $pages = get_pages( array(
+                    'sort_order' => 'ASC',
+                    'sort_column' => 'ID'
+                ));
 
-                foreach( $categories as $category ) {
-                    if ($category->count != 0){
+                foreach( $pages as $page ) {  
+                    if ($page->post_title != "Home") :
+                        $content = $page->post_content;
+                        //$content = apply_filters( 'the_content', $content );
                         ?>
                         
                         <section class="section-cat">
                             <?php
-                            $category_link = sprintf( 
+                            $page_link = sprintf( 
                                 '<a href="%1$s" alt="%2$s">%3$s</a>',
-                                // esc_url( get_category_link( $category->term_id ) ),
-                                esc_url( get_site_url().'/'.$category->slug ),
-                                esc_attr( sprintf( __( 'Go to %s page', 'textdomain' ), $category->name ) ),
+                                // esc_url( get_page_link( $page->term_id ) ),
+                                esc_url( get_page_link( $page->ID ) ),
+                                esc_attr( sprintf( __( 'Go to %s page', 'textdomain' ), $page->post_title ) ),
                                 esc_html( "Go to page >>>" )
                             );
                             ?>
 
                             <div class="section-description">
                                 <?php
-                                // echo '<p>' . sprintf( esc_html__( 'Category: %s', 'textdomain' ), $category_link ) . '</p> ';
-                                // echo '<p>' . sprintf( esc_html__( 'Description: %s', 'textdomain' ), $category->description ) . '</p>';
-                                // echo '<p>' . sprintf( esc_html__( 'Post Count: %s', 'textdomain' ), $category->count ) . '</p>';
-                                echo '<h3 class=cat-title>' . $category->name . '</h3>';
-                                echo '<p class=cat-description>' . $category->description . '</p>';
-                                echo '<p class=cat-link>' . $category_link . '</p>';
+                                // echo '<p>' . sprintf( esc_html__( 'page: %s', 'textdomain' ), $page_link ) . '</p> ';
+                                // echo '<p>' . sprintf( esc_html__( 'Description: %s', 'textdomain' ), $page->description ) . '</p>';
+                                // echo '<p>' . sprintf( esc_html__( 'Post Count: %s', 'textdomain' ), $page->count ) . '</p>';
+                                echo '<h3 class=cat-title>' . $page->post_title . '</h3>';
+                                echo '<div class=cat-description>' . wp_trim_words( $page->post_content, 40, '...' ) . '</div>';
+                                echo '<p class=cat-link>' . $page_link . '</p>';
                                 ?>
                             </div>
                             <div class="section-image">
                                 <?php
-                                if ($category->name == "About") echo '<img src="http://wordpress-starter.com/wp-content/uploads/2020/04/IMG_6351.jpeg" />';
-                                elseif ($category->name == "Portfolio") echo '<img src="http://wordpress-starter.com/wp-content/uploads/2020/04/kuni-min-scaled.jpg" />';
-                                elseif ($category->name == "News") echo '<img src="http://wordpress-starter.com/wp-content/uploads/2020/04/mandoo-scaled.jpg" />';
-                                elseif ($category->name == "Community") echo '<img src="http://wordpress-starter.com/wp-content/uploads/2020/04/IMG_6057.jpeg" />';
-                                elseif ($category->name == "Careers") echo '<img src="http://wordpress-starter.com/wp-content/uploads/2020/04/IMG_5475.jpeg" />';                                
+                                echo get_the_post_thumbnail( $page->ID, 'medium');
                                 ?>
                             </div>  
                         </section>
                         <?php
-                    }
+                    
+                endif;
                     
                 } 
             ?>
