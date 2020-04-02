@@ -25,36 +25,42 @@
 <div id="page" class="site">
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'heejeong-theme' ); ?></a>
 
-	<div class="header-image"><?php the_header_image_tag(); ?></div>
+	
 
 	<header id="masthead" class="site-header">
-		<div class="site-branding">
-			<?php
-			the_custom_logo();
-			if ( is_front_page() && is_home() ) :
-				?>
-				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+		<?php
+		if ( is_front_page() || is_home()) :
+		?>
+		<div class="site-branding ishome">
+			<?php the_header_image_tag(); ?>
 				<?php
 			else :
 				?>
-				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
+		<div class="site-branding isnothome">
 				<?php
 			endif;
+				?>
+			<div class="site-banner">
+				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+				<?php
 			$heejeong_theme_description = get_bloginfo( 'description', 'display' );
-			if ( $heejeong_theme_description || is_customize_preview() ) :
+			if ( $heejeong_theme_description ) :
 				?>
 				<p class="site-description"><?php echo $heejeong_theme_description; /* WPCS: xss ok. */ ?></p>
 			<?php endif; ?>
+			</div>
 		</div><!-- .site-branding -->
 
 		<nav id="site-navigation" class="main-navigation">
 			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></button>
-			<?php
-			wp_nav_menu( array(
-				'theme_location' => 'menu-1',
-				'menu_id'        => 'primary-menu',
-			) );
-			?>
+			<div class=wrap>
+				<?php
+				wp_nav_menu( array(
+					'theme_location' => 'menu-1',
+					'menu_id'        => 'primary-menu',
+				) );
+				?>
+			</div>
 		</nav><!-- #site-navigation -->
 	</header><!-- #masthead -->
 
