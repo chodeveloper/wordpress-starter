@@ -1,8 +1,55 @@
+.site {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.wrap {
+  max-width: 1000px;
+  margin: auto;
+  padding: 0 2em;
+  width: 100%;
+
+  @media screen and (min-width: 950px) {
+    padding: 0 1em;
+  }
+
+  &.two-columns {
+    display: flex;
+    flex-direction: column-reverse;
+
+    @media screen and (min-width: 950px) {
+      display: block;
+    }
+
+    &>*:first-child { 
+
+      @media screen and (min-width: 950px) {
+        float: left;
+        width: 58%;
+      }
+    }
+
+    &>*:last-child {
+      
+      @media screen and (min-width: 950px) {
+        padding: 1em 0;
+        width: 36%;
+        float: right;
+      }
+    }
+
+      
+
+  }
+}
+
 .site-content {
-    padding: 1em;
+    padding: 1em 0;
 
     @media screen and (min-width: $query__small) {
-		padding: 2em;
+		padding: 2em 0;
 	}
 }
 

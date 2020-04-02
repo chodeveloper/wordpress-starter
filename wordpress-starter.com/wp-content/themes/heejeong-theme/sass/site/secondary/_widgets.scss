@@ -1,8 +1,32 @@
+.widget-area {
+	display: flex;
+	flex-direction: column;
+}
+
 .widget {
 	margin: 0 0 1.5em;
 
 	/* Make sure select elements fit in widgets. */
 	select {
 		max-width: 100%;
+	}
+}
+
+.search-form {
+	
+}
+
+input[type="search"].search-field {
+	font-size: 0.9em;
+}
+
+input[type="submit"].search-submit {
+    border: 2px solid white;
+    font-size: 0.9em;
+	padding: .4em 1em;
+	
+	&:hover {
+		border: 2px solid cornflowerblue;
+		cursor: pointer;
 	}
 }
