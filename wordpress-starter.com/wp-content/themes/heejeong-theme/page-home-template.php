@@ -29,12 +29,16 @@ get_header();
                         
                         <section class="section-cat">
                             <?php
+                            $linkmsg;
+                            if ($page->post_title == "Contact") $linkmsg = "Get in touch";
+                            else $linkmsg = "Go to page >>>";
+
                             $page_link = sprintf( 
                                 '<a href="%1$s" alt="%2$s">%3$s</a>',
                                 // esc_url( get_page_link( $page->term_id ) ),
                                 esc_url( get_page_link( $page->ID ) ),
                                 esc_attr( sprintf( __( 'Go to %s page', 'textdomain' ), $page->post_title ) ),
-                                esc_html( "Go to page >>>" )
+                                esc_html( $linkmsg )
                             );
                             ?>
 
