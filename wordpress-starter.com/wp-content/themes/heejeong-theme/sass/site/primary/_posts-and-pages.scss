@@ -21,3 +21,92 @@
 	clear: both;
 	margin: 0 0 1.5em;
 }
+
+
+// HOME page template
+.home-content {
+	padding-bottom: 2em;
+}
+.section-cat {
+	display: flex;
+	flex-direction: row;
+	max-width: 100%;
+	height: 300px;
+	margin-bottom: 2em;
+	margin-left: auto;
+	margin-right: auto;
+
+	@media screen and (min-width: 950px) {
+		max-width: 600px;
+	}
+
+	&:nth-child(even) {
+		flex-direction: row-reverse;
+		text-align: right;
+
+		.section-description {
+			padding-right: 0;
+			padding-left: 1em;
+
+			.cat-link {
+				text-align: right;
+			}
+		}
+	}
+
+	.section-description {
+		width: 60%;
+		padding-right: 1em;
+		padding-left: 0;
+
+		.cat-title {
+			margin-top: 0;
+		}
+		.cat-description {
+			font-size: 0.7em;
+		}
+		.cat-link {
+			margin-bottom: 0.5em;
+			text-align: left;
+
+			a {
+				font-size: 0.7em;
+				text-decoration: none;
+				color: #aaa;
+
+				&:hover, &:focus {
+					color: $color__skin;
+				}
+			}			
+		}
+	}
+
+	.section-image {
+		width: 40%;
+		height: 300px;
+		img {
+			width: 100%;	
+			height: 100%;		
+			object-fit: cover;
+		}
+	}
+}
+
+
+// ABOUT page template
+.section.about {
+	padding: 1.5em 0;
+	.title.about {
+		margin: 0;
+	}
+}
+.gallery.about {
+	justify-content: center;
+	margin-top: 1.5em;
+	img {
+		max-height: 400px;
+		max-width: 300px;
+		object-fit: contain;
+	}
+	
+}
