@@ -22,6 +22,13 @@
 	margin: 0 0 1.5em;
 }
 
+.section {
+	padding: 1.5em 0;
+	.title {
+		margin: 0;
+	}
+}
+
 
 // HOME page template
 .home-content {
@@ -94,12 +101,6 @@
 
 
 // ABOUT page template
-.section.about {
-	padding: 1.5em 0;
-	.title.about {
-		margin: 0;
-	}
-}
 .gallery.about {
 	justify-content: center;
 	margin-top: 1.5em;
@@ -110,3 +111,46 @@
 	}
 	
 }
+
+// PORTFOLIO page template
+.section.portfolio {
+	display: flex;
+	flex-direction: row;
+	padding-top: 0;
+}
+
+.portfolio-gallery {
+	padding: 1em;
+
+	.portfolio-link {
+		text-decoration: none;
+		width: 200px;
+		height: 300px;
+		overflow: hidden;
+		display: block;
+
+		.portfolio-image {
+			width: 200px;
+			height: 200px;
+			background-color: rgba(0,0,0,0.9);
+	
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				opacity: 0.7;
+			}
+		}
+
+		.portfolio-title {
+			margin: 0.5em 0;
+		}
+
+		p {
+			margin: 0;
+			font-size: 0.6em;
+			color: #777;
+		}		
+	}
+}
+

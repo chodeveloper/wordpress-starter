@@ -1218,6 +1218,14 @@ button.dropdown-toggle {
 	margin: 0 0 1.5em;
 }
 
+.section {
+	padding: 1.5em 0;
+}
+
+.section .title {
+	margin: 0;
+}
+
 .home-content {
 	padding-bottom: 2em;
 }
@@ -1301,14 +1309,6 @@ button.dropdown-toggle {
 	   object-fit: cover;
 }
 
-.section.about {
-	padding: 1.5em 0;
-}
-
-.section.about .title.about {
-	margin: 0;
-}
-
 .gallery.about {
 	-webkit-box-pack: center;
 	    -ms-flex-pack: center;
@@ -1321,6 +1321,53 @@ button.dropdown-toggle {
 	max-width: 300px;
 	-o-object-fit: contain;
 	   object-fit: contain;
+}
+
+.section.portfolio {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	    -ms-flex-direction: row;
+	        flex-direction: row;
+	padding-top: 0;
+}
+
+.portfolio-gallery {
+	padding: 1em;
+}
+
+.portfolio-gallery .portfolio-link {
+	text-decoration: none;
+	width: 200px;
+	height: 300px;
+	overflow: hidden;
+	display: block;
+}
+
+.portfolio-gallery .portfolio-link .portfolio-image {
+	width: 200px;
+	height: 200px;
+	background-color: rgba(0, 0, 0, 0.9);
+}
+
+.portfolio-gallery .portfolio-link .portfolio-image img {
+	width: 100%;
+	height: 100%;
+	-o-object-fit: cover;
+	   object-fit: cover;
+	opacity: 0.7;
+}
+
+.portfolio-gallery .portfolio-link .portfolio-title {
+	margin: 0.5em 0;
+}
+
+.portfolio-gallery .portfolio-link p {
+	margin: 0;
+	font-size: 0.6em;
+	color: #777;
 }
 
 /*--------------------------------------------------------------
