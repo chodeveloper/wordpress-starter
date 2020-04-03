@@ -76,3 +76,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /** Sets up WordPress vars and included files. */
 require_once ABSPATH . 'wp-settings.php';
+
+/** Enable WP_DEBUG */
+define( 'WP_DEBUG', true );
+
+/** Enable Theme Check */
+define( 'TC_POST', 'Feel free to make use of the contact details below if you have any questions,
+comments, or feedback:[[br]]
+[[br]]
+* Leave a comment on this ticket[[br]]
+* Send an email to the Theme Review email list[[br]]
+* Use the #wordpress-themes IRC channel on Freenode.' );
+
