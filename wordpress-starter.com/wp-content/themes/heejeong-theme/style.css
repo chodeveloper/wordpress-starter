@@ -1332,6 +1332,11 @@ button.dropdown-toggle {
 	    -ms-flex-direction: row;
 	        flex-direction: row;
 	padding-top: 0;
+	-ms-flex-wrap: wrap;
+	    flex-wrap: wrap;
+	-webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
 }
 
 .portfolio-gallery {
@@ -1362,12 +1367,25 @@ button.dropdown-toggle {
 
 .portfolio-gallery .portfolio-link .portfolio-title {
 	margin: 0.5em 0;
+	color: #222;
+}
+
+.portfolio-gallery .portfolio-link:hover .portfolio-image img, .portfolio-gallery .portfolio-link:focus .portfolio-image img {
+	opacity: 1;
+}
+
+.portfolio-gallery .portfolio-link:hover .portfolio-title, .portfolio-gallery .portfolio-link:focus .portfolio-title {
+	color: #6495ed;
 }
 
 .portfolio-gallery .portfolio-link p {
 	margin: 0;
 	font-size: 0.6em;
 	color: #777;
+}
+
+.section.news {
+	padding-top: 0;
 }
 
 /*--------------------------------------------------------------

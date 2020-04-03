@@ -10,7 +10,7 @@ get_header();
 			<main id="main" class="site-main">
 
 			<?php
-			$args = array( 'post_type' =>  'post' ); 
+			$args = array( 'post_type' =>  'post', 'orderby' => 'title', 'order' => 'ASC' ); 
 			$query = new WP_Query($args);
 			
 			if ( have_posts() ) : 

@@ -1,15 +1,17 @@
 <?php
 /**
-* Template Name: Portfolio page template
+* Template Name: News page template
 */
+
 get_header();
 ?>
 	<div class="wrap">
 		<div id="primary" class="content-area">
 			<main id="main" class="site-main">
 
-			<?php
-			$args = array( 'post_type' =>  'post', 'orderby' => 'data', 'order' => 'DESC' ); 
+            <?php
+            // sort by date and contributor (the most recent article at the top)
+			$args = array( 'post_type' =>  'post', 'orderby' => 'date, author', 'order' => 'DESC' ); 
 			$query = new WP_Query($args);
 			
 			if ( have_posts() ) : 
@@ -19,20 +21,21 @@ get_header();
 				endwhile; 
                 rewind_posts();
             ?>
-                <section class="section portfolio">
+                
                 <?php
                     
                     if ( $query->have_posts() ) :	
                         while ( $query->have_posts() ) : $query->the_post(); 
-                            if ( in_category(get_cat_ID("Portfolio") ) ) :
+                            if ( in_category(get_cat_ID("News") ) ) :
                                 ?>
-                                <div class="portfolio-gallery">
-                                    <a class="portfolio-link" href="<?php echo esc_url( the_permalink() ); ?>">
-                                        <div class="portfolio-image"><?php the_post_thumbnail('medium');?></div>
-                                        <?php the_title( '<h5 class="portfolio-title">', '</h5>') ?>                                            
-                                        <?php the_content(); ?>  
-                                    </a>
-                                </div>
+                                <section class="section news">
+                                    <?php
+                                        the_title('<h3 class="news-title"><a href="'.get_permalink().'">', '</a></h3>');
+                                    ?>
+                                    <div class="info">
+                                        By <?php the_author_posts_link(); ?> on <?php the_time('F jS, Y'); ?>
+                                    </div>
+                                </section>
                                 <?php
                             endif;
                         endwhile; 
@@ -41,7 +44,7 @@ get_header();
                     _e( 'Sorry, no pages matched your criteria.', 'textdomain' ); 
                 endif; 
                 ?>
-                </section>
+                
 			</main><!-- #main -->
 		</div><!-- #primary -->
 	</div>
