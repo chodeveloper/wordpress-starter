@@ -29,27 +29,30 @@ get_header();
                         
                         <section class="section-cat">
                             <?php
-                            $linkmsg;
-                            if ($page->post_title == "Contact") $linkmsg = "Get in touch";
-                            else $linkmsg = "Go to page >>>";
 
                             $page_link = sprintf( 
                                 '<a href="%1$s" alt="%2$s">%3$s</a>',
                                 // esc_url( get_page_link( $page->term_id ) ),
                                 esc_url( get_page_link( $page->ID ) ),
                                 esc_attr( sprintf( __( 'Go to %s page', 'textdomain' ), $page->post_title ) ),
-                                esc_html( $linkmsg )
+                                esc_html( "Go to page >>>" )
                             );
-                            ?>
 
-                            <div class="section-description">
-                                <?php
-                                // echo '<p>' . sprintf( esc_html__( 'page: %s', 'textdomain' ), $page_link ) . '</p> ';
-                                // echo '<p>' . sprintf( esc_html__( 'Description: %s', 'textdomain' ), $page->description ) . '</p>';
-                                // echo '<p>' . sprintf( esc_html__( 'Post Count: %s', 'textdomain' ), $page->count ) . '</p>';
-                                echo '<h3 class=cat-title>' . $page->post_title . '</h3>';
-                                echo '<div class=cat-description>' . wp_trim_words( $page->post_content, 30, '...' ) . '</div>';
-                                echo '<p class=cat-link>' . $page_link . '</p>';
+                                if ($page->post_title == "Contact") {
+                                    ?>
+                                    <div class="section-description d-flex align-items-center justify-content-center">
+                                        <?php
+                                    echo '<a class="btn btn-info text-light" href="'.get_page_link( $page->ID ).'">Get In Touch</a>';
+                                }
+                                else {
+                                    ?>
+                                    <div class="section-description">
+                                        <?php
+                                    echo '<h3 class=cat-title>' . $page->post_title . '</h3>';
+                                    echo '<div class=cat-description>' . wp_trim_words( $page->post_content, 30, '...' ) . '</div>';
+                                    echo '<p class=cat-link>' . $page_link . '</p>';
+                                }
+                                
                                 ?>
                             </div>
                             <div class="section-image">

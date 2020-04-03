@@ -1210,7 +1210,7 @@ button.dropdown-toggle {
 
 .post:not(body),
 .page:not(body) {
-	margin: 0 0 1.5em;
+	margin: 0 0 2em;
 }
 
 .updated:not(.published) {
@@ -1218,7 +1218,6 @@ button.dropdown-toggle {
 }
 
 .page-content,
-.entry-content,
 .entry-summary {
 	margin: 1.5em 0 0;
 }
@@ -1494,6 +1493,64 @@ button.dropdown-toggle {
 .section.contact i {
 	color: #6495ed;
 	margin-right: 1em;
+}
+
+article.category-portfolio .entry-header {
+	padding-bottom: 2em;
+}
+
+article.category-portfolio .entry-header .entry-meta {
+	font-size: 0.8em;
+	color: #555;
+}
+
+article.category-portfolio .entry-section {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: start;
+	    -ms-flex-pack: start;
+	        justify-content: flex-start;
+	-webkit-box-align: end;
+	    -ms-flex-align: end;
+	        align-items: flex-end;
+}
+
+article.category-portfolio .entry-section .post-thumbnail {
+	width: 40%;
+	margin-right: 1em;
+}
+
+article.category-portfolio .entry-section .post-thumbnail img {
+	width: 100%;
+	-o-object-fit: cover;
+	   object-fit: cover;
+}
+
+article.category-portfolio .entry-content p {
+	margin: 0;
+}
+
+.cat-nav {
+	padding-bottom: 2em;
+	font-size: 0.8em;
+}
+
+.cat-nav .cat-prev {
+	float: left;
+}
+
+.cat-nav .cat-next {
+	float: right;
+}
+
+.cat-nav a {
+	text-decoration: none;
+	color: #777;
+}
+
+.cat-nav a:hover, .cat-nav a:focus {
+	color: #6495ed;
 }
 
 /*--------------------------------------------------------------
