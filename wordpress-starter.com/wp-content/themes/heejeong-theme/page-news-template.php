@@ -30,10 +30,10 @@ get_header();
                                 ?>
                                 <section class="section news">
                                     <?php
-                                        the_title('<h3 class="news-title"><a href="'.get_permalink().'">', '</a></h3>');
+                                        the_title('<h4 class="news-title"><a href="'.get_permalink().'">', '</a></h4>');
                                     ?>
-                                    <div class="info">
-                                        By <?php the_author_posts_link(); ?> on <?php the_time('F jS, Y'); ?>
+                                    <div class="news-info">
+                                        By <b><?php the_author(); ?></b> on <?php the_time('F jS, Y'); ?>
                                     </div>
                                 </section>
                                 <?php
