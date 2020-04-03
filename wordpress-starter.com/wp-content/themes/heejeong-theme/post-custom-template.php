@@ -16,8 +16,8 @@ get_header();
                 
                 ?>
                 <div class="cat-nav">
-                    <div class="cat-prev"><?php previous_post_link('%link', '&#9664; %title', true);?></div>
-                    <div class="cat-next"><?php next_post_link('%link', '%title &#9654;', true);?></div>
+                    <div class="cat-prev"><?php previous_post_link('%link', '%title', true);?></div>
+                    <div class="cat-next"><?php next_post_link('%link', '%title', true);?></div>
                     
                 </div>
                 <?php
