@@ -249,3 +249,24 @@
 	}
 }
 
+// CAREERS page template
+.section.careers {
+	padding-top: 0;
+}
+.careers-title {
+	margin: 0.5em 0;
+
+	a {
+		color: #555;
+		text-decoration: none;
+	}
+
+	a:hover, a:focus {
+		color: $color__skin;
+	}
+}
+.careers-info {
+	font-size: 0.8em;
+	color: #777;
+}
+
