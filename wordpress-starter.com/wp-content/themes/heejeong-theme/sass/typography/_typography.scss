@@ -14,6 +14,14 @@ textarea {
 	}
 }
 
+p {
+	@include font-size(.8);
+
+	@media screen and (min-width: 700px) {
+		@include font-size(.9);
+	}
+}
+
 @import "headings";
 
 @import "copy";

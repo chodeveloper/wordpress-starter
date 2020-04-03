@@ -48,7 +48,7 @@ get_header();
                                 // echo '<p>' . sprintf( esc_html__( 'Description: %s', 'textdomain' ), $page->description ) . '</p>';
                                 // echo '<p>' . sprintf( esc_html__( 'Post Count: %s', 'textdomain' ), $page->count ) . '</p>';
                                 echo '<h3 class=cat-title>' . $page->post_title . '</h3>';
-                                echo '<div class=cat-description>' . wp_trim_words( $page->post_content, 40, '...' ) . '</div>';
+                                echo '<div class=cat-description>' . wp_trim_words( $page->post_content, 30, '...' ) . '</div>';
                                 echo '<p class=cat-link>' . $page_link . '</p>';
                                 ?>
                             </div>

@@ -47,6 +47,7 @@
 
 .site-content {
     padding: 1em 0;
+    min-height: 58vh;
 
     @media screen and (min-width: $query__small) {
 		padding: 2em 0;
