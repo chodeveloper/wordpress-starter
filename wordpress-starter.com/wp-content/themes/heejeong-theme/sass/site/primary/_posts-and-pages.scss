@@ -11,9 +11,10 @@
 	display: none;
 }
 
-.page-content,
+.page-content
 // .entry-content,
-.entry-summary {
+// .entry-summary 
+{
 	margin: 1.5em 0 0;
 }
 
@@ -195,6 +196,7 @@
 
 // COMMUNITY page template 
 .section.community {
+	padding: 0.5em 0;
 	.community-title {
 		margin: 0.5em 0;
 	}
@@ -285,21 +287,31 @@
 
 
 // POST custom template 
-article.post {
+article.post, article.page {
 	
 	.entry-header {
-		padding-bottom: 2em;
+		padding-bottom: 1em;
+		.entry-title {
+			a {
+				text-decoration: none;
+				color: #555;
+
+				&:hover, &:focus {
+					color: $color__skin;
+				}
+			}
+		}
 		.entry-meta {
 			font-size: 0.8em;
 			color: #555;
 		}
-
 	}
 	
 	.entry-section {
 		display: flex;
 		justify-content: flex-start;
 		align-items: flex-end;
+		padding-top: 1em;
 
 		.post-thumbnail {
 			width: 40%;
@@ -371,5 +383,49 @@ article.post {
 	a:hover, a:focus {
 		color: $color__skin;
 	}
+}
 
+
+// SEARCH page template 
+.site-main.search {
+	article {
+		border-bottom: 2px dashed #aaa;
+		margin: 0;
+		padding: 1.5em 0;
+	}
+	article:last-child {
+		border-bottom: none;
+	}
+
+	nav {
+		padding-top: 1.5em;
+		a {
+			text-decoration: none;
+			color: #555;
+			&:hover, &:focus {
+				color: $color__skin;
+			}
+		}		
+	}
+}
+.search-section {
+
+	.post-thumbnail {
+		display: block;
+		width: 100px;
+		height: 100px;
+		margin-bottom: 1em;
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+	.entry-summary {
+		p {
+			font-size: 0.7em;
+			color: #555;
+			margin-bottom: 0;
+		}
+	}
 }
