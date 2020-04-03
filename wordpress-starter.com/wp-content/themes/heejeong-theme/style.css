@@ -423,6 +423,7 @@ p {
 h1, h2, h3, h4, h5, h6 {
 	clear: both;
 	font-family: "Baloo 2", cursive;
+	font-weight: bold;
 }
 
 h1 {
@@ -1400,7 +1401,7 @@ button.dropdown-toggle {
 }
 
 .section.news {
-	padding-top: 0;
+	padding: 1em 0;
 }
 
 .news-title {
@@ -1422,7 +1423,7 @@ button.dropdown-toggle {
 }
 
 .section.community .community-title {
-	margin: 0;
+	margin: 0.5em 0;
 }
 
 .section.community p {
@@ -1465,7 +1466,7 @@ button.dropdown-toggle {
 }
 
 .section.careers {
-	padding-top: 0;
+	padding: 1em 0;
 }
 
 .careers-title {
@@ -1484,6 +1485,15 @@ button.dropdown-toggle {
 .careers-info {
 	font-size: 0.8em;
 	color: #777;
+}
+
+.section.contact p {
+	color: #777;
+}
+
+.section.contact i {
+	color: #6495ed;
+	margin-right: 1em;
 }
 
 /*--------------------------------------------------------------

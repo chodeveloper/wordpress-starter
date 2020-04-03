@@ -125,7 +125,7 @@ function heejeong_theme_scripts() {
 	// adding google webfonts
 	wp_enqueue_style( 'heejeong-theme-fonts', 'https://fonts.googleapis.com/css?family=Baloo+2:400,700|Open+Sans:400,600,700&display=swap' );
 	// adding bootstrap 4 css
-	//wp_enqueue_style( 'bootstrap', 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' );
+	wp_enqueue_style( 'bootstrap', 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' );
 	// adding FA css
 	wp_enqueue_style( 'fontawesome', 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' );
 

@@ -175,7 +175,7 @@
 
 // NEWS page template
 .section.news {
-	padding-top: 0;
+	padding: 1em 0;
 }
 .news-title {
 	margin: 0.5em 0;
@@ -197,7 +197,7 @@
 // COMMUNITY page template 
 .section.community {
 	.community-title {
-		margin: 0;
+		margin: 0.5em 0;
 	}
 
 	p {
@@ -251,7 +251,7 @@
 
 // CAREERS page template
 .section.careers {
-	padding-top: 0;
+	padding: 1em 0;
 }
 .careers-title {
 	margin: 0.5em 0;
@@ -270,3 +270,16 @@
 	color: #777;
 }
 
+
+// CONTACT page template
+.section.contact {
+	p {
+		color: #777;
+	}
+
+	i {
+		color: $color__skin;
+		margin-right: 1em;
+	}
+
+}
