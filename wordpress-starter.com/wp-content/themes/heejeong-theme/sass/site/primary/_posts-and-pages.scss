@@ -194,3 +194,58 @@
 	color: #777;
 }
 
+// COMMUNITY page template 
+.section.community {
+	.community-title {
+		margin: 0;
+	}
+
+	p {
+		padding: 1em;
+		position: relative;
+		background: #9ec0ff;
+		border-radius: 1em;
+		text-align: center;
+		font-size: 0.8em;
+	}
+
+	&:nth-child(odd) {
+		p {
+			&:after {
+				content: '';
+				position: absolute;
+				right: 0;
+				top: 50%;
+				width: 0;
+				height: 0;
+				border: 1em solid transparent;
+				border-left-color: #9ec0ff;
+				border-right: 0;
+				border-bottom: 0;
+				margin-top: -0.5em;
+				margin-right: -1em;
+			}
+		}
+	}
+	
+
+	&:nth-child(even) {
+		p {
+			&:after {
+				content: '';
+				position: absolute;
+				left: 0;
+				top: 50%;
+				width: 0;
+				height: 0;
+				border: 1em solid transparent;
+				border-right-color: #9ec0ff;
+				border-left: 0;
+				border-bottom: 0;
+				margin-top: -0.5em;
+				margin-left: -1em;
+			}
+		}
+	}
+}
+
