@@ -125,7 +125,7 @@ class HeejeongPlugin {
                 do_settings_sections( 'heejeong_plugin' );
                 
                 // submit button
-                // submit_button();
+                submit_button();
                 
                 ?>
                 
@@ -135,6 +135,21 @@ class HeejeongPlugin {
         <?php
         
     }   
+
+    // default plugin options
+    function heejeong_plugin_options_default() {
+
+        return array(
+            'custom_url'     => 'https://wordpress.org/',
+            'custom_title'   => 'Powered by WordPress',
+            'custom_style'   => 'disable',
+            'custom_message' => '<p class="custom-message">My custom message</p>',
+            'custom_footer'  => 'Powered by HeejeongCho',
+            'custom_toolbar' => false,
+            'custom_scheme'  => 'default',
+        );
+
+    }
 
     // register plugin settings
     function heejeong_plugin_register_settings() {
@@ -236,7 +251,7 @@ class HeejeongPlugin {
     
 
         //------------------------------------------------------------------------ admin page
-        /*
+        
 
         add_settings_section( 
             'heejeong_plugin_section_admin', 
@@ -245,6 +260,8 @@ class HeejeongPlugin {
             'heejeong_plugin'
         );
 
+        // add custom footer text to the admin area
+        // users should be able to set it to anything they like
         add_settings_field(
             'custom_footer',
             'Custom Footer',
@@ -254,6 +271,7 @@ class HeejeongPlugin {
             [ 'id' => 'custom_footer', 'label' => 'Custom footer text' ]
         );
     
+        /*
         add_settings_field(
             'custom_toolbar',
             'Custom Toolbar',
@@ -279,8 +297,104 @@ class HeejeongPlugin {
 
     // validate plugin settings
     function heejeong_plugin_callback_validate_options($input) {
+
+        // custom url
+        if ( isset( $input['custom_url'] ) ) {
+            
+            $input['custom_url'] = esc_url( $input['custom_url'] );
+            
+        }
+
+        // custom footer
+        if ( isset( $input['custom_footer'] ) ) {
+            
+            $input['custom_footer'] = sanitize_text_field( $input['custom_footer'] );
+            
+        }
         
-        // todo: add validation functionality..
+        /*
+        // custom url
+        if ( isset( $input['custom_url'] ) ) {
+            
+            $input['custom_url'] = esc_url( $input['custom_url'] );
+            
+        }
+        
+        // custom title
+        if ( isset( $input['custom_title'] ) ) {
+            
+            $input['custom_title'] = sanitize_text_field( $input['custom_title'] );
+            
+        }
+        
+        // custom style
+        $radio_options = array(
+            
+            'enable'  => 'Enable custom styles',
+            'disable' => 'Disable custom styles'
+            
+        );
+        
+        if ( ! isset( $input['custom_style'] ) ) {
+            
+            $input['custom_style'] = null;
+            
+        }
+        if ( ! array_key_exists( $input['custom_style'], $radio_options ) ) {
+            
+            $input['custom_style'] = null;
+            
+        }
+        
+        // custom message
+        if ( isset( $input['custom_message'] ) ) {
+            
+            $input['custom_message'] = wp_kses_post( $input['custom_message'] );
+            
+        }
+        
+        // custom footer
+        if ( isset( $input['custom_footer'] ) ) {
+            
+            $input['custom_footer'] = sanitize_text_field( $input['custom_footer'] );
+            
+        }
+        
+        // custom toolbar
+        if ( ! isset( $input['custom_toolbar'] ) ) {
+            
+            $input['custom_toolbar'] = null;
+            
+        }
+        
+        $input['custom_toolbar'] = ($input['custom_toolbar'] == 1 ? 1 : 0);
+        
+        // custom scheme
+        $select_options = array(
+            
+            'default'   => 'Default',
+            'light'     => 'Light',
+            'blue'      => 'Blue',
+            'coffee'    => 'Coffee',
+            'ectoplasm' => 'Ectoplasm',
+            'midnight'  => 'Midnight',
+            'ocean'     => 'Ocean',
+            'sunrise'   => 'Sunrise',
+            
+        );
+        
+        if ( ! isset( $input['custom_scheme'] ) ) {
+            
+            $input['custom_scheme'] = null;
+            
+        }
+        
+        if ( ! array_key_exists( $input['custom_scheme'], $select_options ) ) {
+            
+            $input['custom_scheme'] = null;
+        
+        }
+        */
         
         return $input;
         
@@ -298,68 +412,129 @@ class HeejeongPlugin {
     // callback: login section
     function heejeong_plugin_callback_section_login() {
         
-        echo '<p>These settings enable you to customize the WP Login screen.</p>';        
+        // echo '<p>These settings enable you to customize the WP Login screen.</p>';        
+        echo '<p>You can set a custom link for the W logo on the WP Login screen</p>';      
     }
 
     // callback: admin section
     function heejeong_plugin_callback_section_admin() {
         
-        echo '<p>These settings enable you to customize the WP Admin Area.</p>';        
-    }
+        // echo '<p>These settings enable you to customize the WP Admin Area.</p>';    
+        echo '<p>You can add custom footer text to the WP Admin Area</p>';    
+    }    
     
     // callback: text field
     function heejeong_plugin_callback_field_text( $args ) {
-
-        // todo: add callback functionality..
-
-        echo 'This will be a text field.';
+        
+        $options = get_option( 'heejeong_plugin_options', $this->heejeong_plugin_options_default() );
+        
+        $id    = isset( $args['id'] )    ? $args['id']    : '';
+        $label = isset( $args['label'] ) ? $args['label'] : '';
+        
+        $value = isset( $options[$id] ) ? sanitize_text_field( $options[$id] ) : '';
+        
+        echo '<input id="heejeong_plugin_options_'. $id .'" name="heejeong_plugin_options['. $id .']" type="text" size="40" value="'. $value .'"><br />';
+        echo '<label for="heejeong_plugin_options_'. $id .'">'. $label .'</label>';        
     }
 
+    /*
     // callback: radio field
     function heejeong_plugin_callback_field_radio( $args ) {
-
-        // todo: add callback functionality..
-
-        echo 'This will be a radio field.';
+        
+        $options = get_option( 'heejeong_plugin_options', $this->heejeong_plugin_options_default() );
+        
+        $id    = isset( $args['id'] )    ? $args['id']    : '';
+        $label = isset( $args['label'] ) ? $args['label'] : '';
+        
+        $selected_option = isset( $options[$id] ) ? sanitize_text_field( $options[$id] ) : '';
+        
+        $radio_options = array(
+            
+            'enable'  => 'Enable custom styles',
+            'disable' => 'Disable custom styles'
+            
+        );
+        
+        foreach ( $radio_options as $value => $label ) {
+            
+            $checked = checked( $selected_option === $value, true, false );
+            
+            echo '<label><input name="heejeong_plugin_options['. $id .']" type="radio" value="'. $value .'"'. $checked .'> ';
+            echo '<span>'. $label .'</span></label><br />';
+            
+        }
+        
     }
 
     // callback: textarea field
     function heejeong_plugin_callback_field_textarea( $args ) {
-
-        // todo: add callback functionality..
-
-        echo 'This will be a textarea.';
+        
+        $options = get_option( 'heejeong_plugin_options', $this->heejeong_plugin_options_default() );
+        
+        $id    = isset( $args['id'] )    ? $args['id']    : '';
+        $label = isset( $args['label'] ) ? $args['label'] : '';
+        
+        $allowed_tags = wp_kses_allowed_html( 'post' );
+        
+        $value = isset( $options[$id] ) ? wp_kses( stripslashes_deep( $options[$id] ), $allowed_tags ) : '';
+        
+        echo '<textarea id="heejeong_plugin_options_'. $id .'" name="heejeong_plugin_options['. $id .']" rows="5" cols="50">'. $value .'</textarea><br />';
+        echo '<label for="heejeong_plugin_options_'. $id .'">'. $label .'</label>';
+        
     }
 
     // callback: checkbox field
     function heejeong_plugin_callback_field_checkbox( $args ) {
-
-        // todo: add callback functionality..
-
-        echo 'This will be a checkbox.';
+        
+        $options = get_option( 'heejeong_plugin_options', $this->heejeong_plugin_options_default() );
+        
+        $id    = isset( $args['id'] )    ? $args['id']    : '';
+        $label = isset( $args['label'] ) ? $args['label'] : '';
+        
+        $checked = isset( $options[$id] ) ? checked( $options[$id], 1, false ) : '';
+        
+        echo '<input id="heejeong_plugin_options_'. $id .'" name="heejeong_plugin_options['. $id .']" type="checkbox" value="1"'. $checked .'> ';
+        echo '<label for="heejeong_plugin_options_'. $id .'">'. $label .'</label>';
+        
     }
 
     // callback: select field
     function heejeong_plugin_callback_field_select( $args ) {
-
-        // todo: add callback functionality..
-
-        echo 'This will be a select menu.';
+        
+        $options = get_option( 'heejeong_plugin_options', $this->heejeong_plugin_options_default() );
+        
+        $id    = isset( $args['id'] )    ? $args['id']    : '';
+        $label = isset( $args['label'] ) ? $args['label'] : '';
+        
+        $selected_option = isset( $options[$id] ) ? sanitize_text_field( $options[$id] ) : '';
+        
+        $select_options = array(
+            
+            'default'   => 'Default',
+            'light'     => 'Light',
+            'blue'      => 'Blue',
+            'coffee'    => 'Coffee',
+            'ectoplasm' => 'Ectoplasm',
+            'midnight'  => 'Midnight',
+            'ocean'     => 'Ocean',
+            'sunrise'   => 'Sunrise',
+            
+        );
+        
+        echo '<select id="heejeong_plugin_options_'. $id .'" name="heejeong_plugin_options['. $id .']">';
+        
+        foreach ( $select_options as $value => $option ) {
+            
+            $selected = selected( $selected_option === $value, true, false );
+            
+            echo '<option value="'. $value .'"'. $selected .'>'. $option .'</option>';
+            
+        }
+        
+        echo '</select> <label for="heejeong_plugin_options_'. $id .'">'. $label .'</label>';
+        
     }
-
-
-
-
-    
-
-
-    // add custom footer text to the admin area
-    // users should be able to set it to anything they like
-
-   
-
-
-
+    */
 
 }
 
