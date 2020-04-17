@@ -15,6 +15,8 @@
 // exit if file is called directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+// include plugin dependencies: admin and public
+require_once plugin_dir_path( __FILE__ ) . 'includes/core-functions.php';
 
 class HeejeongPlugin {  
    
@@ -24,11 +26,11 @@ class HeejeongPlugin {
 
         add_action( 'init', array( $this, 'heejeong_plugin_add_custom_post_type' ) );
         register_activation_hook( __FILE__, array( $this, 'heejeong_plugin_activate' ) );
-        register_deactivation_hook( __FILE__, array( $this, 'heejeong_plugin_deactivate' ) );       
-    }   
+        register_deactivation_hook( __FILE__, array( $this, 'heejeong_plugin_deactivate' ) );   
+    }       
 
-     // add custom post type
-     function heejeong_plugin_add_custom_post_type() {
+    // add custom post type
+    function heejeong_plugin_add_custom_post_type() {
 
         /*
 
@@ -102,6 +104,11 @@ class HeejeongPlugin {
         );
         
     }
+
+
+    
+
+    /** CHALLENGE: Settings API **/
 
     // display the plugin settings page
     function heejeong_plugin_display_settings_page() {
@@ -538,5 +545,4 @@ class HeejeongPlugin {
 
 }
 
-$heejeongPlugin = new HeejeongPlugin();
-
+$heejeongPlugin = new HeejeongPlugin;
