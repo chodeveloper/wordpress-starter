@@ -1,0 +1,4 @@
+<?php // Heejeong Plugin - Core Functionality
+
+// exit if file is called directly
+if ( ! defined( 'ABSPATH' ) ) exit;
