@@ -16,7 +16,6 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 
-
 class HeejeongPlugin {  
    
     function __construct() {
@@ -27,6 +26,55 @@ class HeejeongPlugin {
         register_activation_hook( __FILE__, array( $this, 'heejeong_plugin_activate' ) );
         register_deactivation_hook( __FILE__, array( $this, 'heejeong_plugin_deactivate' ) );       
     }   
+
+     // add custom post type
+     function heejeong_plugin_add_custom_post_type() {
+
+        /*
+
+            register_post_type(
+                string       $post_type,
+                array|string $args = array()
+            )
+
+            For a list of $args, check out:
+            https://developer.wordpress.org/reference/functions/register_post_type/
+
+        */
+
+        $args = array(
+            'labels'             => array( 'name' => 'MyPlugin' ),
+            'public'             => true,
+            'publicly_queryable' => true,
+            'show_ui'            => true,
+            'show_in_menu'       => true,
+            'query_var'          => true,
+            'rewrite'            => array( 'slug' => 'myplugin' ),
+            'capability_type'    => 'post',
+            'has_archive'        => true,
+            'hierarchical'       => false,
+            'menu_position'      => null,
+            'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' ),
+        );
+
+        register_post_type( 'myplugin', $args );
+    }
+
+    function heejeong_plugin_activate() {
+        // trigger the function that registers the custom post type
+        $this->heejeong_plugin_add_custom_post_type();
+    
+        // clear the permalinks after the post type has been registered
+        flush_rewrite_rules();
+    }
+
+    function heejeong_plugin_deactivate() {
+        // unregister the post type, so the rules are no longer in memory
+        unregister_post_type( 'myplugin' );
+    
+        // clear the permalinks to remove our post type's rules from the database
+        flush_rewrite_rules();
+    }
 
     // add top-level administrative menu
     function heejeong_plugin_register_admin_menu() {
@@ -115,15 +163,117 @@ class HeejeongPlugin {
             callable $callback, 
             string   $page
         );
+
+        add_settings_field(
+            string   $id,
+            string   $title,
+            callable $callback,
+            string   $page,
+            string   $section = 'default',
+            array    $args = []
+        );
         
         */
         
+        /*
+        // from the first challenge
         add_settings_section( 
             'heejeong_plugin_section_login', 
             null, // 'First Plugin Challenge', 
             array( $this, 'heejeong_plugin_callback_section' ), 
             'heejeong_plugin'
         );
+        */  
+
+
+        //------------------------------------------------------------------------ login page
+        add_settings_section( 
+            'heejeong_plugin_section_login', 
+            'Customize Login Page', 
+            array( $this, 'heejeong_plugin_callback_section_login' ), 
+            'heejeong_plugin'
+        );
+        
+        // set a custom link for the W logo on the login page 
+        // users should be able to set it to anything they like
+        add_settings_field(
+            'custom_url',
+            'Custom URL',
+            array( $this, 'heejeong_plugin_callback_field_text' ),
+            'heejeong_plugin',
+            'heejeong_plugin_section_login',
+            [ 'id' => 'custom_url', 'label' => 'Custom URL for the login logo link' ]
+        );
+    
+        /*
+        add_settings_field(
+            'custom_title',
+            'Custom Title',
+            array( $this, 'heejeong_plugin_callback_field_text' ),
+            'heejeong_plugin',
+            'heejeong_plugin_section_login',
+            [ 'id' => 'custom_title', 'label' => 'Custom title attribute for the logo link' ]
+        );
+    
+        add_settings_field(
+            'custom_style',
+            'Custom Style',
+            array( $this, 'heejeong_plugin_callback_field_radio' ),
+            'heejeong_plugin',
+            'heejeong_plugin_section_login',
+            [ 'id' => 'custom_style', 'label' => 'Custom CSS for the Login screen' ]
+        );
+    
+        add_settings_field(
+            'custom_message',
+            'Custom Message',
+            array( $this, 'heejeong_plugin_callback_field_textarea' ),
+            'heejeong_plugin',
+            'heejeong_plugin_section_login',
+            [ 'id' => 'custom_message', 'label' => 'Custom text and/or markup' ]
+        );
+        */
+    
+
+        //------------------------------------------------------------------------ admin page
+        /*
+
+        add_settings_section( 
+            'heejeong_plugin_section_admin', 
+            'Customize Admin Area', 
+            array( $this, 'heejeong_plugin_callback_section_admin' ), 
+            'heejeong_plugin'
+        );
+
+        add_settings_field(
+            'custom_footer',
+            'Custom Footer',
+            array( $this, 'heejeong_plugin_callback_field_text' ),
+            'heejeong_plugin',
+            'heejeong_plugin_section_admin',
+            [ 'id' => 'custom_footer', 'label' => 'Custom footer text' ]
+        );
+    
+        add_settings_field(
+            'custom_toolbar',
+            'Custom Toolbar',
+            array( $this, 'heejeong_plugin_callback_field_checkbox' ),
+            'heejeong_plugin',
+            'heejeong_plugin_section_admin',
+            [ 'id' => 'custom_toolbar', 'label' => 'Remove new post and comment links from the Toolbar' ]
+        );
+    
+        add_settings_field(
+            'custom_scheme',
+            'Custom Scheme',
+            array( $this, 'heejeong_plugin_callback_field_select' ),
+            'heejeong_plugin',
+            'heejeong_plugin_section_admin',
+            [ 'id' => 'custom_scheme', 'label' => 'Default color scheme for new users' ]
+        );
+        
+        */
+    
         
     }
 
@@ -136,61 +286,80 @@ class HeejeongPlugin {
         
     }
 
-    // callback: challenge section
+    /*
+    // callback: first challenge section
     function heejeong_plugin_callback_section() {
         
         echo '<p>My first WP Plugin!</p>';
         
     }
+    */
 
-    // add custom post type
-    function heejeong_plugin_add_custom_post_type() {
-
-        /*
-
-            register_post_type(
-                string       $post_type,
-                array|string $args = array()
-            )
-
-            For a list of $args, check out:
-            https://developer.wordpress.org/reference/functions/register_post_type/
-
-        */
-
-        $args = array(
-            'labels'             => array( 'name' => 'MyPlugin' ),
-            'public'             => true,
-            'publicly_queryable' => true,
-            'show_ui'            => true,
-            'show_in_menu'       => true,
-            'query_var'          => true,
-            'rewrite'            => array( 'slug' => 'myplugin' ),
-            'capability_type'    => 'post',
-            'has_archive'        => true,
-            'hierarchical'       => false,
-            'menu_position'      => null,
-            'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments' ),
-        );
-
-        register_post_type( 'myplugin', $args );
+    // callback: login section
+    function heejeong_plugin_callback_section_login() {
+        
+        echo '<p>These settings enable you to customize the WP Login screen.</p>';        
     }
 
-    function heejeong_plugin_activate() {
-        // trigger the function that registers the custom post type
-        $this->heejeong_plugin_add_custom_post_type();
+    // callback: admin section
+    function heejeong_plugin_callback_section_admin() {
+        
+        echo '<p>These settings enable you to customize the WP Admin Area.</p>';        
+    }
     
-        // clear the permalinks after the post type has been registered
-        flush_rewrite_rules();
+    // callback: text field
+    function heejeong_plugin_callback_field_text( $args ) {
+
+        // todo: add callback functionality..
+
+        echo 'This will be a text field.';
     }
 
-    function heejeong_plugin_deactivate() {
-        // unregister the post type, so the rules are no longer in memory
-        unregister_post_type( 'myplugin' );
-    
-        // clear the permalinks to remove our post type's rules from the database
-        flush_rewrite_rules();
+    // callback: radio field
+    function heejeong_plugin_callback_field_radio( $args ) {
+
+        // todo: add callback functionality..
+
+        echo 'This will be a radio field.';
     }
+
+    // callback: textarea field
+    function heejeong_plugin_callback_field_textarea( $args ) {
+
+        // todo: add callback functionality..
+
+        echo 'This will be a textarea.';
+    }
+
+    // callback: checkbox field
+    function heejeong_plugin_callback_field_checkbox( $args ) {
+
+        // todo: add callback functionality..
+
+        echo 'This will be a checkbox.';
+    }
+
+    // callback: select field
+    function heejeong_plugin_callback_field_select( $args ) {
+
+        // todo: add callback functionality..
+
+        echo 'This will be a select menu.';
+    }
+
+
+
+
+    
+
+
+    // add custom footer text to the admin area
+    // users should be able to set it to anything they like
+
+   
+
+
+
 
 }
 
