@@ -175,3 +175,13 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
+/**
+ * Hide the ACF Menu Item for specific users
+ */
+function my_acf_show_admin( $show ) {
+    
+    return current_user_can('manage_options');
+    
+}
+add_filter('acf/settings/show_admin', 'my_acf_show_admin');
+
