@@ -18,8 +18,13 @@ get_header();
 
                     <?php if( $field['value'] ): ?>
                         <h5><?php echo $field['label']; ?></h5> 
-                        <p><?php echo $field['value']; ?></p>
-                    <?php endif; ?>
+                        <?php if ($field['label']=='Budget Range'): ?>
+                            <p><?php echo '$' . number_format($field['value'], 2); ?></p> 
+                        <?php
+                         else:
+                        ?>
+                            <p><?php echo $field['value']; ?></p>                        
+                    <?php endif; endif; ?>
 
                 <?php endforeach; ?>
             <?php endif; ?>        
