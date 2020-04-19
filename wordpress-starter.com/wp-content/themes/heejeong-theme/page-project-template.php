@@ -17,12 +17,18 @@ get_header();
                 <?php foreach( $fields as $field ): ?>
 
                     <?php if( $field['value'] ): ?>
-                        <h5><?php echo $field['label']; ?></h5> 
+                        
                         <?php if ($field['label']=='Budget Range'): ?>
+                            <h5><?php echo $field['label']; ?></h5> 
                             <p><?php echo '$' . number_format($field['value'], 2); ?></p> 
+                        <?php
+                         elseif ($field['label']=='Image'):
+                        ?>
+                            <img src="<?php echo $field['value']; ?>" style="max-width:300px;height:auto;"/>      
                         <?php
                          else:
                         ?>
+                            <h5><?php echo $field['label']; ?></h5> 
                             <p><?php echo $field['value']; ?></p>                        
                     <?php endif; endif; ?>
 
