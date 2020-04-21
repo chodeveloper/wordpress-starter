@@ -15,7 +15,7 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 // include plugin dependencies
-require_once plugin_dir_path( __FILE__ ) . 'includes/http-api.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/my_gitfeed_http.php';
 
 class MyGitfeed {
 
