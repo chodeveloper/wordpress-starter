@@ -29,22 +29,16 @@ class MyGitfeed {
     }     
 
     function my_gitfeed_activate() {
-        // check if user is allowed access
+
         if ( ! current_user_can( 'activate_plugins' ) ) return;
-        // trigger the function that registers the custom post type
-        
     
-        // clear the permalinks after the post type has been registered
         flush_rewrite_rules();
     }
 
     function my_gitfeed_deactivate() {
-        // check if user is allowed access
         if ( ! current_user_can( 'deactivate_plugins' ) ) return;
-        // unregister the post type, so the rules are no longer in memory
         
     
-        // clear the permalinks to remove our post type's rules from the database
         flush_rewrite_rules();
     }
 
@@ -53,7 +47,8 @@ class MyGitfeed {
 
         return array(
             'username'     => '',
-            'reponame'         => ''
+            'password'     => '',
+            'reponame'     => ''
         );
 
     }
@@ -93,7 +88,7 @@ class MyGitfeed {
                 do_settings_sections( 'my_gitfeed' );
                 
                 // submit button
-                submit_button();
+                submit_button('Get Feeds');
                 
                 ?>
                 
@@ -116,7 +111,7 @@ class MyGitfeed {
         //------------------------------------------------------------------------ find section
         add_settings_section( 
             'my_gitfeed_section_find', 
-            'Find your Github repository feeds', 
+            'Get Github repository feeds of your project', 
             array( $this, 'my_gitfeed_callback_section_find' ), 
             'my_gitfeed'
         );
@@ -128,6 +123,14 @@ class MyGitfeed {
             'my_gitfeed',
             'my_gitfeed_section_find',
             [ 'id' => 'username', 'label' => '' ]
+        );  
+
+        add_settings_field(
+            'password',
+            'Password',
+            array( $this, 'my_gitfeed_callback_password' ),
+            'my_gitfeed',
+            'my_gitfeed_section_find'
         );  
         
         add_settings_field(
@@ -150,6 +153,13 @@ class MyGitfeed {
             
         }
 
+        // password
+        if ( isset( $input['password'] ) ) {
+            
+            $input['password'] = sanitize_text_field( $input['password'] );
+            
+        }
+
         // repo
         if ( isset( $input['reponame'] ) ) {
             
@@ -165,8 +175,16 @@ class MyGitfeed {
     function my_gitfeed_callback_section_find() {
 
         $options = get_option( 'my_gitfeed_options', $this->my_gitfeed_options_default() );
-        
-        echo '<p>Shortcode to add the feed to your page or post : [mygitfeed user=\''.$options['username'].'\' repo=\''.$options['reponame'].'\']</p>';      
+         
+        $response = my_gitfeed_get_response($options['username'], $options['reponame']);
+
+        if ( $options['username'] == null || $options['reponame'] == null ) {
+            return;
+        } else {
+            if ($response['repo_code'] == 200) {
+                echo '<p>Shortcode to add the feed to your page or post : <b>[mygitfeed user=\''.$options['username'].'\' repo=\''.$options['reponame'].'\']</b></p>'; 
+            } 
+        }        
     }
     
     // callback: inputs
@@ -174,24 +192,48 @@ class MyGitfeed {
         
         $options = get_option( 'my_gitfeed_options', $this->my_gitfeed_options_default() );
         
-        $id    = isset( $args['id'] )    ? $args['id']    : '';
-        
+        $id    = isset( $args['id'] )    ? $args['id']    : '';        
         $value = isset( $options[$id] ) ? sanitize_text_field( $options[$id] ) : '';
+
+        $response = my_gitfeed_get_response($options['username'], $options['reponame']);
+
+        if ( $value == null ) {
+            $label = 'Username is required';
+        } else {
+            if ( $response['user_code'] == 404 ) {
+                $label = 'Please enter a valid username. Usercode:'.$response['user_code'];
+            } elseif ( $response['user_code'] == 200 ) {
+                $label = '';
+            } else {
+                $label = 'Unexpected error : '.$response['user_code'];
+            }
+        }        
         
         echo '<input id="my_gitfeed_options_'. $id .'" name="my_gitfeed_options['. $id .']" type="text" size="40" value="'. $value .'"><br />';
-        echo '<label for="my_gitfeed_options_'. $id .'">'. $label .'</label>'; 
+        echo '<label for="my_gitfeed_options_'. $id .'" style="color:red;">'. $label .'</label>'; 
     }
 
     function my_gitfeed_callback_reponame( $args ) {
         
         $options = get_option( 'my_gitfeed_options', $this->my_gitfeed_options_default() );
         
-        $id    = isset( $args['id'] )    ? $args['id']    : '';
-        
+        $id    = isset( $args['id'] )    ? $args['id']    : '';       
         $value = isset( $options[$id] ) ? sanitize_text_field( $options[$id] ) : '';
+
+        $response = my_gitfeed_get_response($options['username'], $options['reponame']);
+
+        if ( $value == null ) {
+            $label = 'Repository Name is required';
+        } else {
+            if ( $response['user_code'] == 200 && $response['repo_code'] != 200 ) {
+                $label = 'Please enter a valid repository name of your project';
+            } else {
+                $label = '';
+            }
+        }     
         
         echo '<input id="my_gitfeed_options_'. $id .'" name="my_gitfeed_options['. $id .']" type="text" size="40" value="'. $value .'"><br />';
-        echo '<label for="my_gitfeed_options_'. $id .'">'. $label .'</label>'; 
+        echo '<label for="my_gitfeed_options_'. $id .'" style="color:red;">'. $label .'</label>'; 
     }
 
 }
