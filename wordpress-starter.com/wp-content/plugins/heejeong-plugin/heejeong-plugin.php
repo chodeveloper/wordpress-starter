@@ -434,6 +434,8 @@ class HeejeongPlugin {
     function heejeong_plugin_callback_field_text( $args ) {
         
         $options = get_option( 'heejeong_plugin_options', $this->heejeong_plugin_options_default() );
+
+        //var_dump($options);
         
         $id    = isset( $args['id'] )    ? $args['id']    : '';
         $label = isset( $args['label'] ) ? $args['label'] : '';
